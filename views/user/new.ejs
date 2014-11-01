@@ -1,0 +1,39 @@
+<style type="text/css">
+  .form-signin {
+    max-width: 30%;
+    padding: 19px 29px 20px;
+    margin: 20px auto 20px;
+    border-radius: 15px;
+    background: #ececec;
+
+  }
+  .form-signin-heading {
+    text-align: center;
+    margin-top: 0;
+  }
+  .form-signin input[type='text'],
+  .form-signin input[type='password'] {
+    font-size: 16px;
+    height: auto;
+    margin-bottom: 15px;
+    padding: 7px 9px;
+  }
+</style>
+<form action="/user/create" method="post" class="form-signin">
+  <h2 class="form-signin-heading">Create an account</h2>
+  <% if(flash && flash.err) { %>
+  <ul class="alert alert-success">
+    <% Object.keys(flash.err).forEach(function  (error) { %>
+      <li><%- JSON.stringify(flash.err[error]) %></li>
+    <% }) %>
+  </ul>
+  <% } %>
+  <input type="text" class="form-control" placeholder="your name" name="name"/>
+  <input type="text" class="form-control" placeholder="your title" name="title"/>
+  <input type="text" class="form-control" placeholder="your email" name="email"/>
+  <input type="password" class="form-control" placeholder="password" name="password"/>
+  <input type="password" class="form-control" placeholder="password confirmation" name="confirmation"/>
+  <br/>
+  <input type="submit" class="btn btn-lg btn-primary btn-block" value="Ctreate Account"/>
+  <input type="hidden" name="_csrf" value="<%= _csrf %>"/>
+</form>

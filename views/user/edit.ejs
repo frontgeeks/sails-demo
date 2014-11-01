@@ -1,0 +1,41 @@
+<style type="text/css">
+  .form-signin {
+    max-width: 30%;
+    padding: 19px 29px 20px;
+    margin: 20px auto 20px;
+    border-radius: 15px;
+    background: #ececec;
+
+  }
+  .form-signin-heading {
+    text-align: center;
+    margin-top: 0;
+  }
+  .form-signin input[type='text'],
+  .form-signin input[type='password'] {
+    font-size: 16px;
+    height: auto;
+    margin-bottom: 15px;
+    padding: 7px 9px;
+  }
+</style>
+<form action="/user/update/<%= user.id %>" method="post" class="form-signin">
+  <h2 class="form-signin-heading">Update an account</h2>
+
+  <input value="<%= user.name %>" name="name" type="text" class="form-control"/>
+  <input value="<%= user.title %>" name="title" type="text" class="form-control"/>
+  <input value="<%= user.email %>" name="email" type="text" class="form-control"/>
+  <% if(session.authenticated && session.User.admin ) { %>
+    <% if(user.admin) { %>
+      <input type="hidden" name="admin" value="unchecked"/>
+      <label class="checkbox"><input type="checkbox" name="admin" checked/>Admin</label>
+    <% } else { %>
+      <input type="hidden" name="admin" value="unchecked"/>
+      <label class="checkbox"><input type="checkbox" name="admin" />Admin</label>
+    <% } %>
+  <% } %>
+
+  <br/>
+  <input type="submit" class="btn btn-lg btn-primary btn-block" value="Proceed"/>
+  <input type="hidden" name="_csrf" value="<%= _csrf %>"/>
+</form>
